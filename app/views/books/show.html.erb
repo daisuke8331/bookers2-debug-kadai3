@@ -36,9 +36,11 @@
         </tr>
       </table>
 <!--以下コメント機能-->
+
+
       <table>
+        <% @book.book_comments.each do |book_comment| %>
         <tr>
-          <% @book.book_comments.each do |book_comment| %>
           <td>
             <p><%= image_tag book_comment.user.get_profile_image(50,50) %></p>
             <%= book_comment.user.name %>
@@ -46,12 +48,17 @@
           <td>
             <%= book_comment.comment %>
           </td>
-          <% end %>
+          <td>
+            <% if book_comment.user == current_user %><!--コメントした本人しか削除できないようにする-->
+              <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-sm btn-danger" %>
+            <% end %>
+          </td>
         </tr>
+        <% end %>
       </table>
       <div>
         <%= form_with model: [@book, @book_comment] do |f| %>
-          <%= f.text_area :comment, style: "width:100%", rows: '5', placeholder: "コメントをここに" %>
+          <%= f.text_area :comment, style: "width:100%", rows: '5', placeholder: "コメントをここに入力" %>
           </br>
           <%= f.submit "送信" %>
         <% end %>
