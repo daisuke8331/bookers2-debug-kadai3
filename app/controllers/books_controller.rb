@@ -6,6 +6,7 @@ class BooksController < ApplicationController
     @newbook = Book.new
     @book = Book.find(params[:id])
     @profile_user = @book.user#詳細画面で、投稿者のプロフィールを表示する
+    @book_comment = BookComment.new#コメント用インスタンス変数
   end
 
   def index

@@ -28,10 +28,20 @@
             <% end %>
           </td>
           <td>
-            <%= render 'favorites/favorites', book: @book %>
+            <%= render 'favorites/favorites', book: @book %><!--いいねボタン-->
+          </td>
+          <td>
+            <p>コメント数:<%= @book.book_comments.count %></p><!--コメント数表示-->
           </td>
         </tr>
       </table>
+<!--以下コメント機能-->
+      <div>
+        <p></p>
+
+
+      </div>
+
     </div>
   </div>
 </div>
