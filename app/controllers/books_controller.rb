@@ -4,8 +4,6 @@ class BooksController < ApplicationController
 
   def show
     @newbook = Book.new
-    #@user = User.find(params[:id])
-    #@user = current_user
     @book = Book.find(params[:id])
     @profile_user = @book.user#詳細画面で、投稿者のプロフィールを表示
   end
