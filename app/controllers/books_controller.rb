@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   def show
     @newbook = Book.new
     @book = Book.find(params[:id])
-    @profile_user = @book.user#詳細画面で、投稿者のプロフィールを表示
+    @profile_user = @book.user#詳細画面で、投稿者のプロフィールを表示する
   end
 
   def index
