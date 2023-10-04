@@ -7,8 +7,13 @@ class BookCommentsController < ApplicationController
     if comment.save
       redirect_to request.referer
     else
-      @user = profile_user.find(params[:id])#ここでnameerror
-      render "books/show"
+      #renderを使用する場合
+      #@profile_user = current_user
+      #@newbook = Book.new
+      #@book = Book.find(params[:book_id])
+      #@book_comment = BookComment.new
+      #render "books/show"
+      redirect_to request.referer
     end
   end
 
