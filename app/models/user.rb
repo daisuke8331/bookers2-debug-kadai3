@@ -10,6 +10,18 @@ class User < ApplicationRecord
 
   has_many :book_comments, dependent: :destroy
 
+  #1:Nの1側 Relationshipモデルに対する
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  #Relationshipモデル内のたくさんのfollowerを持っている/follower_idを外部キーとして引っ張ってくる
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  #Relationshipモデル内のたくさんのfollowedを持っている/followed_idを外部キーとして引っ張ってくる
+  has_many :following_user, through: :follower, source: :followed
+  #following_userという架空のテーブルを作成することで、Relationshipモデル(中間テーブル)
+  #を経由してfollowedテーブルからデータを取得できる
+  has_many :follower_user, through: :followed, source: :follower
+  #follower_userという架空のテーブルを作成することで、Relationshipモデル(中間テーブル)
+  #を経由してfollowerテーブルからデータを取得できる
+
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
