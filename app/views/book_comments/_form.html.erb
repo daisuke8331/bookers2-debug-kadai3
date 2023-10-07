@@ -1,0 +1,9 @@
+<div>
+  <%= form_with model: [book, book_comment], local: false do |f| %>
+    <%= f.text_area :comment, style: "width:100%", rows: '5', placeholder: "コメントをここに入力", id: "comment_textarea" %>
+    </br>
+    <%= f.submit "送信" %>
+  <% end %>
+</div>
+<!--非同期通信化にあたり、form_withヘルパーにlocal: falseを追加-->
+<!--text_areaには非同期通信用のidタグを追加"-->

@@ -5,21 +5,24 @@ class BookCommentsController < ApplicationController
     comment = current_user.book_comments.new(book_comment_params)
     comment.book_id = book.id
     if comment.save
-      redirect_to request.referer
+      @book = Book.find(params[:book_id])
+      #redirect_to request.referer 非同期通信のため削除
     else
       #renderを使用する場合、
-      #@profile_user = current_user
+      #@profile_user = @book.user
       #@newbook = Book.new
       #@book = Book.find(params[:book_id])
       #@book_comment = BookComment.new
       #render "books/show"
-      redirect_to request.referer
+
+      #redirect_to request.referer
     end
   end
 
   def destroy #コメントを削除する
     BookComment.find(params[:id]).destroy
-    redirect_to request.referer
+    @book = Book.find(params[:book_id])
+    #redirect_to request.referer　非同期通信のため
   end
 
   private
